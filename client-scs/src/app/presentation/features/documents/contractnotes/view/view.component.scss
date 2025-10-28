@@ -1,0 +1,26 @@
+main {
+    padding: 10px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    & > div {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    h1 {
+        color: red;
+        font-size: 22px;
+    }
+    p .red {
+        color: red;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+    table {
+        width: fit-content;
+        td {
+            padding-right: 20px;
+        }
+    }
+}

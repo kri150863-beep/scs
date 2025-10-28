@@ -1,0 +1,47 @@
+<main>
+    <p>Please find here with your latest indicative statement of valuation for your investment in the sub funds of Swan Global Funds Ltd.</p>
+    <div class="statement__container">
+        <h1>Statement</h1>
+        <div class="flex flex-col gap-3">
+            <p>Name of Shareholder:</p>
+
+            <div>
+                <p>Address:</p>
+                <p>Valuation Date</p>
+            </div>
+        
+            <table>
+                <thead>
+                    <tr>
+                        <th>FUNDS</th>
+                        <th>Fund Base Currency</th>
+                        <th>Reference Number</th>
+                        <th>Shares</th>
+                        <th>NAV per share</th>
+                        <th>Equivalent CCY</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="spacer"></tr>
+                    <tr *ngFor="let item of content; let i = index" [style.background-color]="getBg(i)">
+                        <td>{{ item.fund }}</td>
+                        <td>{{ item.currency }}</td>
+                        <td>{{ item.ref_number }}</td>
+                        <td>{{ item.shares }}</td>
+                        <td>{{ item.nav_per_share }}</td>
+                        <td>{{ item.ccy }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div>
+        <div class="flex flex-col gap-2">
+            <p class="font-bold">MANAGER</p>
+            <p class="font-bold">Swan Wealth Managers Ltd</p>
+        </div>
+        <p>email : wealth.managers&#64;swancapitalsolutions.com</p>
+
+    </div>
+</main>

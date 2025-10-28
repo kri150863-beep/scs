@@ -1,0 +1,142 @@
+<main class="px-12 py-4 flex gap-4">
+    <div class="grow-1 basis-2/5">
+        <p class="title">General Information</p>
+        <table>
+            <tr>
+                <td>NAV Price (USD) <b>*</b></td>
+                <td>{{numberFormat(factsheet.nav_price ?? 0)}}</td>
+            </tr>
+            <tr>
+                <td>Total Fund Size (USD)</td>
+                <td>{{numberFormat(factsheet.total_fund_size ?? 0)}}</td>
+            </tr>
+            <tr>
+                <td>Yield to worst</td>
+                <td>{{factsheet.yield}}%</td>
+            </tr>
+            <tr>
+                <td>Base currency</td>
+                <td>{{factsheet.base_currency}}</td>
+            </tr>
+            <tr>
+                <td>Additional Dealing Currencies</td>
+                <td>{{factsheet.additional_dealing_currencies}}</td>
+            </tr>
+            <tr>
+                <td>Benchmark</td>
+                <td>{{factsheet.benchmark}}</td>
+            </tr>
+            <tr>
+                <td>Launch date</td>
+                <td>{{dateFormat(factsheet.launch_date)}}</td>
+            </tr>
+            <tr>
+                <td>ISIN</td>
+                <td>{{factsheet.isin}}</td>
+            </tr>
+        </table>
+        <p>* Net of dividends paid</p>
+
+        <p class="title">Other Information</p>
+        <table>
+            <tr>
+                <td>Status :</td>
+                <td>{{factsheet.status}}</td>
+            </tr>
+            <tr>
+                <td>Manager :</td>
+                <td>{{factsheet.manager}}</td>
+            </tr>
+            <tr>
+                <td>Local Custodian</td>
+                <td>{{factsheet.local_custodian}}</td>
+            </tr>
+            <tr>
+                <td>Foreign Custodian</td>
+                <td>{{factsheet.foreign_custodian}}</td>
+            </tr>
+        </table>
+
+        <p class="title">Valuation</p>
+        <table>
+            <tr>
+                <td rowspan="2">Valuation Frequency</td>
+                <td>Weekly</td>
+            </tr>
+            <tr><td>Monthly</td></tr>
+        </table>
+
+        <p class="title">Dividend Distribution-</p>
+        <table>
+            <tr>
+                <td></td>
+                <td>% Dividend Paid</td>
+                <td>Dividend per share</td>
+            </tr>
+            <tr *ngFor="let row of factsheet.dividend_distribution">
+                <td>{{row.period}}</td>
+                <td>{{row.dividend_paid}}%</td>
+                <td>USD {{numberFormat(row.dividend_paid/10)}}</td>
+            </tr>
+        </table>
+        <p class="title">Fees</p>
+        <table>
+            <tr>
+                <td>Initial Service Charges</td>
+                <td>{{factsheet.initial_service_charges}}</td>
+            </tr>
+            <tr>
+                <td>Exit fees (First 2 years)</td>
+                <td>{{factsheet.exit_fees}}</td>
+            </tr>
+            <tr>
+                <td>Total expense ratio (inclusive of management fees)</td>
+                <td>{{factsheet.total_expenses_ratio}}</td>
+            </tr>
+        </table>
+        <p class="align-center">For more information, please refer to prospectus of Swan Global Funds Ltd</p>
+        <p class="title">Asset Mix</p>
+        <app-chart [type]="'pie'" [data]="asset_mixes" [options]="pieChartOptions"></app-chart>
+        <p class="title">Sector breakdown</p>
+    </div>
+    
+    <div class="grow-1 basis-3/5">
+        <p>comprising 95.3% of the portfolio and (ii) non-investment grade holdings at 3.0%. In terms of geographical allocation, the Fund is well positioned with the highest exposure being on Europe & Middle East (48.9%), followed by Americas (21.2%) and Emerging markets (11.9%). Regarding our currency profile, we have a strong exposure to USD (99.3%), with the remaining exposure to EUR and MUR. Moreover, our top three sector exposures are the Financial sector (64.1%), followed by Consumer Discretionary (6.7%) and Materials (6.3%). During the month, the key focus was on major central banks’ monetary policy and heightened geopolitical risks in the Middle East as the war spreads to Lebanon. In the US, while headline inflation fell to 2.5% (y-o-y) in Aug-24, the labour market dynamics were mixed with a weaker job growth and lower initial jobless claims. FED’s priority shifted from price stability to maximum employment, as it delivered a higher than expected rate cut of 50bps. The 10Yr US Treasury closed at 3.81% (-10bps m-o-m). In the Eurozone, with inflation falling below ECB’s target rate of 2.00%, ECB cut rates by 0.25% in a bid to resuscitate the economy. The 10Yr German Bund closed at 2.12% (-18bps m-o-m). In the UK, while economic activity remained positive, core inflation stood higher at 3.60% in Aug-24 (3.30% in Jul-24) due to higher airfares. The BoE remained cautious and maintained its key rate at 5.00%. The 10Yr UK Gilt closed at 4.00% (-18bp m-o-m). The 10Yr Japanese bond closed lower at 0.85% (-3bps m-o-m).</p>
+        <p class="title">Graphical Performance (USD) **</p>
+        <p class="font-bold">Indexed</p>
+        <app-chart [type]="'line'" [data]="graphical_performance" [options]="lineChartOptions"></app-chart>
+        <p class="title">Cumulative Performance (USD) **</p>
+        <table class="performance-table">
+            <tr>
+                <td></td>
+                <td *ngFor="let col of columns; let i = index" [ngClass]="{ 'odd-col': i % 2 !== 0 }">{{ col }}</td>
+            </tr>
+            <tr>
+                <td class="row-title">Fund</td>
+                <td *ngFor="let col of factsheet.cumulative_performance; let i = index" [ngClass]="{ 'odd-col': i % 2 !== 0 }">{{ col.fund }}%</td>
+            </tr>
+            <tr>
+                <td class="row-title">Benchmark Yield</td>
+                <td *ngFor="let col of factsheet.cumulative_performance; let i = index" [ngClass]="{ 'odd-col': i % 2 !== 0 }">{{ col.benchmark_yield }}%</td>
+            </tr>
+            <tr>
+                <td class="row-title">Benchmark</td>
+                <td *ngFor="let col of factsheet.cumulative_performance; let i = index" [ngClass]="{ 'odd-col': i % 2 !== 0 }">{{ col.benchmark }}%</td>
+            </tr>
+        </table>
+  
+        <p class="title">Calendar Performance (USD) **</p>
+        <app-chart [type]="'bar'" [data]="calendar_performance" [options]="barChartOptions"></app-chart>
+        <p>** Performance includes dividends paid</p>
+        <table>
+            <tr>
+                <td>
+                    <p class="title">Geographical Allocation</p>
+                </td>
+                <td>
+                    <p class="title">Curency profile</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+</main>

@@ -1,0 +1,64 @@
+<main>
+    <h1>Contract note</h1>
+    <div>
+        <table>
+            <tr>
+                <td>Contract Note No</td>
+                <td>:</td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>:</td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>:</td>
+            </tr>
+            <tr>
+                <td>Shareholder Reference</td>
+                <td>:</td>
+            </tr>
+        </table>
+        <p>Further to your repayment request from your investment in Swan Global Funds Ltd - <b>Emerging Market Equity Fund</b>, please find here under details of the shares <span class="red">redeemed</span> on your behalf</p>
+        <table>
+            <tr>
+                <td>Valuation Date</td>
+                <td>:</td>
+                <td>{{ dateFormat(contractNote.date) }}</td>
+            </tr>
+            <tr>
+                <td>Total Amount Paid</td>
+                <td>:</td>
+                <td>MUR {{ numberFormat(contractNote.total_amount ?? 0) }}</td>
+            </tr>
+            <tr>
+                <td>(In words)</td>
+                <td>:</td>
+                <td>{{ contractNote.in_words }}</td>
+            </tr>
+            <tr>
+                <td>Number of Shares</td>
+                <td>:</td>
+                <td>{{ contractNote.shares }}</td>
+            </tr>
+            <tr>
+                <td>NAV per Share</td>
+                <td>:</td>
+                <td>MUR {{ numberFormat(contractNote.nav_per_share ?? 0) }}</td>
+            </tr>
+        </table>
+        <div class="flex justify-center">
+            <img src="/assets/images/swanstamp.png" width="150px" alt="">
+        </div>
+        <div>
+            <p class="font-bold">MANAGER</p>
+            <div>
+                <p>Swan Wealth Managers Ltd</p>
+                <p>11th Floor Swan Centre</p>
+                <p>10 Intendance Street</p>
+                <p>Port Louis</p>
+                <p>Mauritius</p>
+            </div>
+        </div>
+    </div>
+</main>

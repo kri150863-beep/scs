@@ -1,0 +1,78 @@
+<form [formGroup]="accountForm">
+    <div class="flex flex-col items-center space-y-3 py-4" *ngIf="fields.length">
+        <!-- Avatar (Image or Initial) -->
+        <div
+            class="w-26 h-26 rounded-full flex items-center justify-center text-white text-3xl font-bold overflow-hidden"
+            [ngClass]="{'bg-primary': !imageUrl}">
+            <img *ngIf="imageUrl; else initialTemplate" [src]="imageUrl" class="w-full h-full object-cover" />
+            <ng-template #initialTemplate>
+                {{ initial }}
+            </ng-template>
+        </div>
+
+        <!-- Hidden File Input -->
+        <input type="file" id="fileInput" (change)="onFileSelected($event)" accept="image/*" class="hidden" />
+
+        <div class="flex justify-between gap-2">
+            <!-- Change Image Button -->
+            <button
+                class="flex items-center space-x-2 text-sm text-gray-700 border border-gray-300 px-3 py-1 rounded hover:bg-gray-100 cursor-pointer"
+                (click)="triggerFileInput()">
+                <!-- <mat-icon class="h-4 w-4 text-yellow-700">vertical_align_bottom</mat-icon> -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-700" viewBox="0 0 20 20"
+                    fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm7 2a1 1 0 112 0 1 1 0 01-2 0zM5 14l3.5-4.5 2.5 3L14.5 10 17 14H5z"
+                        clip-rule="evenodd" />
+                </svg>
+                <span>Change image</span>
+            </button>
+            <!-- Remove Image Button -->
+            <button
+                *ngIf="imageUrl"
+                class="flex items-center space-x-2 text-sm text-gray-700 border border-gray-300 px-3 py-1 rounded hover:bg-gray-100 cursor-pointer"
+                (click)="removeAvatar()">
+                <!-- <mat-icon class="h-4 w-4 text-yellow-700">vertical_align_bottom</mat-icon> -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-700" viewBox="0 0 20 20"
+                    fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm7 2a1 1 0 112 0 1 1 0 01-2 0zM5 14l3.5-4.5 2.5 3L14.5 10 17 14H5z"
+                        clip-rule="evenodd" />
+                </svg>
+                <span>Remove image</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="info-line" *ngFor="let item of fields">
+        <div [class.flex]="isWebsiteField(item.key)" [class.justify-between]="isWebsiteField(item.key)"
+            [class.items-center]="isWebsiteField(item.key)">
+            <div>
+                <div class="label font-semibold">{{ item.label }}</div>
+                <!-- Display mode -->
+                <div class="value" *ngIf="!item.editable">{{ item.value }}</div>
+                <!-- Edit mode (only for website field) -->
+                <div *ngIf="item?.editable && isWebsiteField(item.key)" class="edit-mode mt-2 w-80">
+                    <input type="url" [value]="item.value" formControlName="website"
+                        [(ngModel)]="accountForm.value.website" class="border border-gray-300 rounded px-3 py-2 w-full">
+                    <div *ngIf="getFieldError(item)" class="error-message">
+                        {{ getFieldError(item) }}
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="isWebsiteField(item.key)" class="edit-link pe-6">
+                <button *ngIf="!isEditable(item) && !item.editable"
+                    class="flex items-center edit-button text-sm cursor-pointer" (click)="startWebsiteEdit(item)">
+                    <lucide-angular [img]="icons.edit" class="h-4 w-4"></lucide-angular>
+                    <span class="ml-1">Edit</span>
+                </button>
+                <!-- <div *ngIf="item.editable" class="flex">
+                    <lucide-angular [img]="icons.close" class="h-4 w-4 text-red-500 cursor-pointer"
+                        (click)="cancelWebsiteEdit(item)"></lucide-angular>
+                    <lucide-angular [img]="icons.check" (click)="saveWebsiteEdit(item)"
+                        class="h-4 w-4 text-green-500 ml-1 cursor-pointer"></lucide-angular>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</form>

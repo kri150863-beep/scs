@@ -1,0 +1,80 @@
+version: '3.8'
+services:
+  phpmyadmin:
+    container_name: scs_phpmyadmin
+    image: phpmyadmin/phpmyadmin:latest
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - '8082:80'
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root
+
+  db:
+    container_name: scs_db
+    image: mysql:8.0
+    restart: unless-stopped
+    ports:
+      - '3308:3306'
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./docker/mysql:/docker-entrypoint-initdb.d:ro
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: scs_db
+    healthcheck:
+      test:
+        - CMD
+        - mysqladmin
+        - ping
+        - '-h'
+        - localhost
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    container_name: scs_api
+    build:
+      context: ./api-scs
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - db
+    ports:
+      - '8001:80'
+    volumes:
+      - ./api-scs:/var/www/html:delegated
+    environment:
+      APP_ENV: dev
+      DATABASE_URL: mysql://root:root@db:3306/surveyor_db
+      CLAIM_USER_DB_URL: mysql://root:root@db:3306/user_claim_db
+      GARAGE_DB_URL: mysql://root:root@db:3306/garage_db
+      SCS_DB_URL: mysql://root:root@db:3306/scs_db
+
+  client:
+    container_name: scs_client
+    build:
+      context: ./client-scs
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - api
+    ports:
+      - '4201:4200'
+    volumes:
+      - ./client-scs:/app:delegated
+      - scs_client_angular_cache:/app/.angular
+      - client_node_modules:/app/node_modules
+    environment:
+      CHOKIDAR_USEPOLLING: 'true'
+    command: npm run start -- --host 0.0.0.0 --poll=2000
+
+volumes:
+  db_data: {}
+  client_node_modules: {}
+  scs_client_angular_cache: {}

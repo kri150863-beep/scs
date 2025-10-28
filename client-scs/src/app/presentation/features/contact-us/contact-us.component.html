@@ -1,0 +1,59 @@
+<div class="w-full flex justify-center">
+    <div class="overlay"></div>
+    <div class="py-10 mt-16" *ngIf="contact">
+        <div class="bg-white shadow-lg rounded-lg p-8 max-w-4xl w-full">
+            <h2 class="text-xl font-semibold text-yellow-600 mb-6">Contact us</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+                <!-- Business Development -->
+                <div>
+                    <h3 class="text-gray-800 font-medium mb-4">
+                        Business Development contact details:
+                    </h3>
+                    <div class="space-y-3 text-sm text-gray-700">
+                        <div class="flex items-center gap-2">
+                            <mat-icon class="text-gray-500">person</mat-icon>
+                            <span>{{contact.business_development_contact_details.name}}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <mat-icon class="text-gray-500">mail</mat-icon>
+                            <span>{{contact.business_development_contact_details.email}}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <mat-icon class="text-gray-500">call</mat-icon>
+                            <span>{{contact.business_development_contact_details.phone}}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <mat-icon class="text-gray-500">smartphone</mat-icon>
+                            <span>{{contact.business_development_contact_details.mobile}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SWAN Centre -->
+                <div>
+                    <h3 class="text-gray-800 font-medium mb-4">
+                        SWAN Centre contact details:
+                    </h3>
+                    <div class="space-y-3 text-sm text-gray-700">
+                        <div class="flex items-center gap-2">
+                            <mat-icon class="text-gray-500">location_on</mat-icon>
+                            <span>{{contact.swan_centre_contact_details.address}}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <mat-icon class="text-gray-500">mail</mat-icon>
+                            <span>{{contact.swan_centre_contact_details.email}}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <mat-icon class="text-gray-500">call</mat-icon>
+                            <span>{{contact.swan_centre_contact_details.phone}}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <app-copyright class="flex items-center justify-center z-10" />
+    </div>
+</div>

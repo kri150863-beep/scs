@@ -1,0 +1,56 @@
+<!-- <div class="info-line" *ngFor="let item of fields">
+    <div class="label font-semibold">{{ item.label }}</div>
+    <div class="value">{{ item.value }}</div>
+</div> -->
+<div class="mb-6">
+  <table class="rounded-md min-w-full overflow-hidden shadow">
+    <thead class="bg-secondary text-left">
+      <tr>
+        <th class="px-4 py-2">
+          <div class="flex items-center justify-between">
+            Document Name
+            <button class="icon-button pt-1" (click)="toggleHeaderSearch('reference')">
+              <mat-icon>search</mat-icon>
+            </button>
+          </div>
+          <div *ngIf="activeSearchHeader === 'reference'"
+            class="absolute left-0 top-full mt-1 z-10 bg-white shadow-lg rounded-md border border-gray-200 min-w-[220px]">
+            <div class="relative p-1.5 font-normal">
+              <input [(ngModel)]="headerSearchTerms['reference']"
+                (ngModelChange)="onHeaderSearch('reference', headerSearchTerms['reference'])"
+                (keydown.enter)="onSearchEnter('reference', headerSearchTerms['reference'])"
+                placeholder="Search by reference..."
+                class="w-full border border-gray-300 rounded-md py-2 pl-3 pr-8 text-sm focus:outline-none focus:ring-0 transition-all">
+              <button *ngIf="headerSearchTerms['reference']" (click)="clearHeaderSearch('reference')"
+                class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors">
+                <mat-icon class="!w-4 !h-4 !text-base">close</mat-icon>
+              </button>
+            </div>
+          </div>
+        </th>
+        <th class="px-4 py-2">
+          <div class="flex items-center justify-between">
+            Date Issued
+            <button class="icon-button sort-icons" (click)="onSort('noOfShares')">
+              <mat-icon>arrow_drop_up</mat-icon>
+              <mat-icon>arrow_drop_down</mat-icon>
+            </button>
+          </div>
+        </th>
+        <th class="px-4 py-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody class="bg-white">
+      <tr class="hover:bg-gray-50" *ngFor="let document of documents">
+        <td class="px-4 py-2 border-t border-gray-200">{{document?.name}}</td>
+        <td class="px-4 py-2 border-t border-gray-200">{{document?.date}}</td>
+        <td class="px-4 py-2 border-t border-gray-200">
+            <div class="text-primary">
+                <button class="mr-2 cursor-pointer">View</button>
+                <button class="cursor-pointer">Download</button>
+            </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

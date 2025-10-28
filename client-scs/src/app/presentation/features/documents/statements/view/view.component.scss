@@ -1,0 +1,33 @@
+main {
+    padding: 10px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: fit-content;
+    .statement__container {
+        border: 3px solid black;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 10px;
+        h1 {
+            font-size: 22px;
+            color: #0051ff;
+            text-decoration: underline;
+            text-align: center;
+            font-weight: bold;
+        }
+        table {
+            thead {
+                border-top: 2px solid black;
+                border-bottom: 2px solid black;
+                tr { background-color: #7f7f7f; }
+                * { color: #f0f0f0 };
+                margin-bottom: 20px;
+            }
+            .spacer{
+                height: 15px;
+            }
+        }
+    }
+}

@@ -1,0 +1,30 @@
+<div class="mb-6 flex-1">
+    <div class="mb-4">
+        <span>Overview</span> /
+        <span class="font-semibold">Profile</span>
+    </div>
+    <!-- Back button -->
+    <app-button variant="plain" (click)="onBackToClaimList()">
+        <mat-icon start-icon>arrow_back</mat-icon>
+        Back
+    </app-button>
+</div>
+
+<div class="settings-container bg-white min-h-fit">
+    <aside class="sidebar">
+        <ul class="tab-list">
+            <li *ngFor="let tab of tabs" [class.active]="tab.id === selectedTab" (click)="selectTab(tab.id)">
+                {{ tab.label }}
+            </li>
+        </ul>
+    </aside>
+
+    <section class="content px-6 pt-2 pb-12">
+        <app-account-info [currentUser]="currentUser" *ngIf="selectedTab === 'account'"></app-account-info>
+        <app-financial-info *ngIf="selectedTab === 'financial'"></app-financial-info>
+        <app-employment-info *ngIf="selectedTab === 'employment'"></app-employment-info>
+        <!-- <app-admin-settings [currentUser]="currentUser" *ngIf="selectedTab === 'admin'"></app-admin-settings> -->
+        <app-security-settings [currentUser]="currentUser" *ngIf="selectedTab === 'security'"></app-security-settings>
+        <app-document-info *ngIf="selectedTab === 'document'"></app-document-info>
+    </section>
+</div>

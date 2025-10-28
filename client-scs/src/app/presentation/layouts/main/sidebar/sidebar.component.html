@@ -1,0 +1,38 @@
+<aside class="sidebar" [class.collapsed]="!(sidebarService.isOpen$ | async)">
+    <div class="logo pl-3">
+        <img src="assets/images/logos/logo.png" alt="SWAN" class="h-5" />
+        <p class="text-sm border-l-3 pl-3 mt-2 text-primary font-semibold mb-8">
+            <span>Capital Solutions</span><br />
+            <span class="text-gray-700">Platform</span>
+        </p>
+    </div>
+
+    <ul class="nav">
+        <div *ngFor="let item of menuItems">
+            <li *ngIf="item.link">
+                <a [routerLink]="item.link" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+                    class="nav-link">
+                    <i class="{{ item.icon }}"></i>
+                    <span>{{ item.label }}</span>
+                </a>
+            </li>
+            <div *ngIf="!!item.children" class="accordion__container">
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <mat-panel-title class="nav-link"><i class="{{ item.icon }}"></i>{{ item.label
+                                }}</mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <li *ngFor="let child of item.children" class="children__container">
+                            <a [routerLink]="child.link" routerLinkActive="active"
+                                [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
+                                <i class="{{ child.icon }}"></i>
+                                <span>{{ child.label }}</span>
+                            </a>
+                        </li>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </div>
+    </ul>
+</aside>

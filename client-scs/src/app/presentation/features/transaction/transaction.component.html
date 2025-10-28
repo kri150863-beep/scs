@@ -1,0 +1,23 @@
+<div class="flex justify-between items-center">
+    <h2 class="font-semibold">Transaction history</h2>
+    <app-button variant="outlined-primary" (click)="openExportDialog()">
+        <mat-icon start-icon>output</mat-icon>
+        Export
+    </app-button>
+</div>
+<app-table
+    [headers]="headers"
+    [rows]="formatDatas(transactions)"
+    [paginationOptions]="{
+      itemsPerPage: itemsPerPage,
+      currentPage: currentPage,
+      itemsPerPageOptions: itemsPerPageOptions,
+      totalItems: dataLength
+    }"
+    (sort)="toggleSort($event)"
+    (search)="onSearch($event)"
+    (filter)="onFilter($event)"
+    [filterOptions]="filterOptions"
+    (itemsPerPageChange)="handleItemsPerPageChange($event)"
+    (paginate)="onPageChange($event)"
+></app-table>

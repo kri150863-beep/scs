@@ -1,0 +1,36 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Frontend gitignore file
+
+# Compiled output
+/client-scs/dist
+/client-scs/tmp
+/client-scs/out-tsc
+/client-scs/bazel-out
+
+# Node
+/client-scs/node_modules
+/client-scs/npm-debug.log
+/client-scs/yarn-error.log
+
+# IDEs and editors
+.idea/
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Backend gitignore file
+###> symfony/framework-bundle ###
+/api-scs/.env.local.php
+/api-scs/.env.*.local
+/api-scs/config/secrets/prod/prod.decrypt.private.php
+/api-scs/public/bundles/
+/api-scs/var/
+/api-scs/vendor/
+/api-scs/.env
+/api-scs/.env.dev
+/api-scs/phpunit.xml
+/api-scs/config/secrets/

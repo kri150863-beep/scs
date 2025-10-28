@@ -1,0 +1,23 @@
+main {
+    .title {
+        * {
+            color: #062f87;
+            font-weight: bold;
+        }
+        h1 {
+            line-height: 1;
+            font-size: 64px;
+        }
+        h3 {
+            font-size: 20px;
+        }
+    }
+    .t1 {
+        td {
+            padding-right: 20px;
+            &:last-child {
+                width: 60%;
+            }
+        }
+    }
+}
