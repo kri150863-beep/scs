@@ -10,7 +10,7 @@
         "api-platform/core": "^4.1",
         "api-platform/doctrine-orm": "^4.1",
         "api-platform/symfony": "^4.1",
-        "doctrine/annotations": "^2.0",
+        "doctrine/annotations": "*",
         "doctrine/dbal": "^3",
         "doctrine/doctrine-bundle": "^2.11",
         "doctrine/doctrine-migrations-bundle": "^3.4",

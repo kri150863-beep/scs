@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   private loadRememberedEmail(): void {
     const rememberedEmail = this.authService.getRememberedEmail();
     const rememberedPassword = this.authService.getRememberedPassword();
-    
+
     if (rememberedEmail || rememberedPassword) {
       this.loginForm.patchValue({
         email: rememberedEmail || '',
@@ -116,7 +116,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: () => setTimeout(() => this.handleLoginSuccess()),
-        error: (err) => this.handleLoginError(err)
+        error: (err) => this.handleLoginError(err?.error || err)
       });
   }
 
